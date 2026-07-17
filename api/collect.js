@@ -29,6 +29,7 @@ export default async function handler(req, res) {
 
     const toAnalyze = newCandidates.slice(0, MAX_ANALYZE_PER_RUN);
     const saved = [];
+    const filtered = []; // isRelevant=falseで捨てた件数
     const failed = [];
 
     for (const candidate of toAnalyze) {
@@ -38,6 +39,28 @@ export default async function handler(req, res) {
           body: candidate.body || '',
           sourceType: candidate.sourceType,
         });
+
+        if (analysis.isRelevant === false) {
+          filtered.push(candidate.title);
+          // 却下済みとして保存し、次回収集時に同じ記事を再度AI分析にかけない
+          // ようにする(rejectedはdraft/publishedどちらの一覧にも出てこない)。
+          await saveArticle({
+            id: candidate.id,
+            title: candidate.title,
+            sourceUrl: candidate.link,
+            sourceType: candidate.sourceType,
+            sourceName: candidate.sourceName,
+            category: analysis.category || '未分類',
+            legendScore: analysis.legendScore ?? 0,
+            summary: '(二次利用コンテンツのため除外)',
+            tags: [],
+            status: 'rejected',
+            originalLanguage: candidate.sourceType === 'reddit' ? 'en' : 'ja',
+            createdAt: Date.now(),
+            publishedAt: null,
+          });
+          continue;
+        }
 
         const article = {
           id: candidate.id,
@@ -67,6 +90,7 @@ export default async function handler(req, res) {
       newFound: newCandidates.length,
       analyzed: toAnalyze.length,
       saved: saved.length,
+      filteredOut: filtered.length,
       failed,
     });
   } catch (err) {
