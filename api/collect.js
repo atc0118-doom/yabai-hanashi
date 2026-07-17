@@ -1,5 +1,5 @@
 // api/collect.js
-// Vercel Cron (vercel.json参照) から6時間おきに呼ばれる収集バッチ。
+// Vercel Cron (vercel.json参照) から毎日1回(日本時間 朝6:00)呼ばれる収集バッチ。
 // 手動実行したい場合は /api/collect?admin=doom&manual=1 にGETでアクセスする。
 
 import { collectCandidates, hashUrl } from '../lib/sources.js';
