@@ -70,6 +70,7 @@ export default async function handler(req, res) {
           sourceName: candidate.sourceName,
           category: analysis.category,
           legendScore: analysis.legendScore,
+          hook: analysis.hook || '',
           summary: analysis.summary,
           tags: analysis.tags || [],
           status: 'draft', // 必ず下書きとして保存。公開は管理画面から手動で行う。
