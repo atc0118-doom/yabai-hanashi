@@ -2,6 +2,7 @@
   "name": "yabai-hanashi",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "description": "都市伝説・陰謀論インテリジェンス・ダッシュボード (ORACLEの姉妹プロジェクト)",
   "scripts": {
     "dev": "vercel dev"
