@@ -6,7 +6,7 @@ import { collectCandidates, hashUrl } from '../lib/sources.js';
 import { analyzeArticle } from '../lib/openai.js';
 import { articleExists, saveArticle } from '../lib/storage.js';
 
-const MAX_ANALYZE_PER_RUN = 15; // OpenAI呼び出し数を1回の実行あたり制限(コスト管理)
+const MAX_ANALYZE_PER_RUN = 20; // OpenAI呼び出し数を1回の実行あたり制限(コスト管理)
 
 export default async function handler(req, res) {
   // Vercel Cronからの呼び出しは自動的に許可。手動実行はadmin確認する。
