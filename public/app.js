@@ -88,6 +88,7 @@ function buildCard(article) {
       <span class="card-category">${escapeHtml(article.category || '未分類')}</span>
       <span class="classification-stamp ${stamp.className}">${stamp.label}</span>
     </div>
+    ${article.hook ? `<p class="card-hook">${escapeHtml(article.hook)}</p>` : ''}
     <h3 class="card-title">${escapeHtml(article.title)}</h3>
     <p class="card-summary">${escapeHtml(article.summary || '')}</p>
     <div class="card-tags">
@@ -112,6 +113,7 @@ function openDetail(article) {
   detailPanel.innerHTML = `
     <button class="detail-close" aria-label="閉じる">✕ 閉じる</button>
     <span class="classification-stamp ${stamp.className}">${stamp.label}</span>
+    ${article.hook ? `<p class="card-hook">${escapeHtml(article.hook)}</p>` : ''}
     <h2>${escapeHtml(article.title)}</h2>
     <div class="meta-line">
       カテゴリ: ${escapeHtml(article.category || '未分類')} ／

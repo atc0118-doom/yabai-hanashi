@@ -219,6 +219,15 @@ body {
   color: var(--ink);
 }
 
+/* 煽り見出し(hook): トカナ/ムー/YouTubeサムネ風に太字・斜め・赤みがかった強調 */
+.card-hook {
+  font-family: 'Special Elite', monospace;
+  font-size: 0.95rem;
+  color: var(--stamp-red);
+  margin: 0 0 0.4rem;
+  line-height: 1.4;
+}
+
 .card-summary {
   font-size: 0.88rem;
   color: #3A362F;

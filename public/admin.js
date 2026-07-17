@@ -106,6 +106,7 @@ function buildItem(article) {
     <div class="admin-item-top">
       <span class="admin-item-meta">${escapeHtml(article.category || '未分類')} ／ 都市伝説度 ${article.legendScore ?? '-'}</span>
     </div>
+    ${article.hook ? `<p class="card-hook">${escapeHtml(article.hook)}</p>` : ''}
     <h3 class="admin-item-title">${escapeHtml(article.title)}</h3>
     <div class="admin-item-meta">出典: ${escapeHtml(article.sourceName || '不明')} ／ 収集日時: ${dateStr}</div>
     <p class="admin-item-summary">${escapeHtml(article.summary || '')}</p>
@@ -193,6 +194,9 @@ function openEdit(article) {
       <label for="edit-title">タイトル</label>
       <input id="edit-title" type="text" value="${escapeAttr(article.title)}">
 
+      <label for="edit-hook">煽り見出し(hook・20文字前後)</label>
+      <input id="edit-hook" type="text" value="${escapeAttr(article.hook || '')}">
+
       <label for="edit-category">カテゴリ</label>
       <select id="edit-category">
         ${CATEGORIES.map((c) => `<option value="${c}" ${c === article.category ? 'selected' : ''}>${c}</option>`).join('')}
@@ -219,6 +223,7 @@ function openEdit(article) {
   panel.querySelector('#edit-save-btn').addEventListener('click', async () => {
     const patch = {
       title: panel.querySelector('#edit-title').value.trim(),
+      hook: panel.querySelector('#edit-hook').value.trim(),
       category: panel.querySelector('#edit-category').value,
       legendScore: Number(panel.querySelector('#edit-score').value),
       summary: panel.querySelector('#edit-summary').value.trim(),
