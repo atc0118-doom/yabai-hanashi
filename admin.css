@@ -1,0 +1,192 @@
+/* ==========================================================================
+   admin.css — 管理室(下書きレビュー画面)
+   style.cssのトークン(--paper, --ink, --stamp-red 等)をそのまま継承する。
+   ========================================================================== */
+
+.admin-body {
+  background: var(--paper);
+}
+
+.admin-header {
+  border-bottom: 3px double var(--ink);
+  padding: 2rem 1.5rem 1.5rem;
+  text-align: center;
+  background: var(--paper-dark);
+}
+
+.admin-header .header-tagline {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+}
+
+.admin-board {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 1.75rem 1.25rem 4rem;
+}
+
+.admin-guard {
+  background: #F7F3E9;
+  border: 1px dashed var(--stamp-red);
+  color: var(--stamp-red);
+  padding: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ---------------- Tabs ---------------- */
+.admin-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.admin-tab {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--ink);
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.admin-tab.is-active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.admin-tab span {
+  font-weight: 700;
+}
+
+/* ---------------- Refresh row ---------------- */
+.admin-refresh-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.admin-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 2px;
+  cursor: pointer;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.admin-btn-ghost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.admin-btn-danger {
+  background: transparent;
+  color: var(--stamp-red);
+  border-color: var(--stamp-red);
+}
+
+.admin-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.admin-status-msg {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* ---------------- List ---------------- */
+.admin-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin-item {
+  background: #F7F3E9;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--ink);
+  padding: 1rem 1.1rem 1.1rem;
+}
+
+.admin-item-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.admin-item-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.4rem;
+}
+
+.admin-item-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+.admin-item-summary {
+  font-size: 0.85rem;
+  color: #3A362F;
+  margin: 0 0 0.75rem;
+}
+
+.admin-item-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* ---------------- Edit form (overlay内) ---------------- */
+.edit-form label {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: 0.9rem 0 0.3rem;
+}
+
+.edit-form input,
+.edit-form textarea,
+.edit-form select {
+  width: 100%;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.9rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  background: #FBF8F1;
+  color: var(--ink);
+  border-radius: 2px;
+}
+
+.edit-form textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.edit-form-actions {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1.25rem;
+}
+
+@media (max-width: 480px) {
+  .admin-item-actions { flex-direction: column; }
+  .admin-item-actions .admin-btn { width: 100%; text-align: center; }
+}

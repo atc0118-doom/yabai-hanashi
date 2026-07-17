@@ -1,0 +1,346 @@
+/* ==========================================================================
+   CASE-X FILES — デザイントークン
+   Color:
+     --paper:        #EDE6D6  (クラフト紙)
+     --ink:          #1A1815  (本文・見出し)
+     --redact:       #0D0D0D  (レダクションバー)
+     --stamp-red:    #8B2E2E  (機密スタンプ/警告)
+     --stamp-amber:  #B8935A  (未確定スタンプ)
+     --muted:        #6B6459  (キャプション/メタ情報)
+   Type:
+     Display/Stamp:  'Special Elite' (タイプライター調)
+     Body:           'Noto Serif JP'
+     Utility/Mono:   'JetBrains Mono'
+   Signature: 記事ごとに回転した「機密指定スタンプ」+ ホバーで消えるレダクションバー
+   ========================================================================== */
+
+:root {
+  --paper: #EDE6D6;
+  --paper-dark: #E2D9C4;
+  --ink: #1A1815;
+  --redact: #0D0D0D;
+  --stamp-red: #8B2E2E;
+  --stamp-amber: #B8935A;
+  --stamp-gray: #6B6459;
+  --muted: #6B6459;
+  --border: rgba(26, 24, 21, 0.18);
+}
+
+* { box-sizing: border-box; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Noto Serif JP', serif;
+  line-height: 1.7;
+  position: relative;
+}
+
+/* うっすらとした紙のノイズテクスチャ */
+.paper-texture {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.05;
+  background-image: repeating-linear-gradient(0deg, #000 0px, transparent 1px, transparent 2px);
+  mix-blend-mode: multiply;
+}
+
+/* ---------------- Header ---------------- */
+.site-header {
+  position: relative;
+  z-index: 1;
+  border-bottom: 3px double var(--ink);
+  padding: 2.5rem 1.5rem 2rem;
+  text-align: center;
+  background: var(--paper-dark);
+}
+
+.header-inner { max-width: 760px; margin: 0 auto; }
+
+.case-stamp-logo {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-family: 'Special Elite', monospace;
+  letter-spacing: 0.08em;
+}
+
+.stamp-ring {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  color: var(--ink);
+}
+
+.stamp-core {
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  color: var(--stamp-red);
+  border: 3px solid var(--stamp-red);
+  padding: 0 0.35em;
+  transform: rotate(-2deg);
+  display: inline-block;
+}
+
+.header-tagline {
+  margin: 0.9rem 0 0.3rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+}
+
+.header-disclaimer {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: 0.6rem 0 0;
+}
+
+/* ---------------- Board controls ---------------- */
+.dossier-board {
+  position: relative;
+  z-index: 1;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2rem 1.25rem 4rem;
+}
+
+.board-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.75rem;
+}
+
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.filter-chip {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--ink);
+  padding: 0.35rem 0.8rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.filter-chip:hover { background: var(--border); }
+
+.filter-chip.is-active {
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.board-meta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+/* ---------------- File grid & cards ---------------- */
+.file-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.file-card {
+  position: relative;
+  background: #F7F3E9;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--ink);
+  padding: 1.1rem 1.2rem 1.3rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.file-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+.file-card:focus-visible {
+  outline: 2px solid var(--stamp-red);
+  outline-offset: 2px;
+}
+
+.card-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.6rem;
+}
+
+.card-category {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* 機密指定スタンプ (シグネチャー要素) */
+.classification-stamp {
+  font-family: 'Special Elite', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.5rem;
+  border: 2px solid currentColor;
+  border-radius: 2px;
+  transform: rotate(-4deg);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.stamp-verified   { color: var(--stamp-gray); }
+.stamp-unconfirmed{ color: var(--stamp-amber); }
+.stamp-classified { color: var(--stamp-red); }
+.stamp-legend     { color: var(--stamp-red); background: rgba(139,46,46,0.08); }
+
+.card-title {
+  font-size: 1.02rem;
+  font-weight: 600;
+  margin: 0 0 0.6rem;
+  color: var(--ink);
+}
+
+.card-summary {
+  font-size: 0.88rem;
+  color: #3A362F;
+  margin: 0 0 0.8rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+/* レダクション(黒塗り)バー: ホバーで薄れてタグが見える */
+.redact-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.68rem;
+  color: var(--paper);
+  background: var(--redact);
+  padding: 0.15rem 0.5rem;
+  border-radius: 1px;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.file-card:hover .redact-tag {
+  background: var(--paper-dark);
+  color: var(--ink);
+  outline: 1px dashed var(--border);
+}
+
+.card-source {
+  margin-top: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+/* ---------------- Empty state ---------------- */
+.empty-state {
+  text-align: center;
+  padding: 4rem 1rem;
+  color: var(--muted);
+}
+.empty-sub { font-size: 0.85rem; }
+
+/* ---------------- Detail overlay ---------------- */
+.detail-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(13,13,13,0.55);
+  z-index: 10;
+  overflow-y: auto;
+  padding: 3rem 1rem;
+  display: none;
+}
+
+.detail-overlay:not([hidden]) {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.detail-panel {
+  background: var(--paper);
+  max-width: 640px;
+  width: 100%;
+  padding: 2rem 2rem 2.5rem;
+  border: 1px solid var(--border);
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+}
+
+.detail-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  background: transparent;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+.detail-panel h2 {
+  font-size: 1.4rem;
+  margin: 1.5rem 0 0.75rem;
+}
+
+.detail-panel .meta-line {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 1rem;
+}
+
+.detail-panel a.source-link {
+  display: inline-block;
+  margin-top: 1.2rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--stamp-red);
+  text-decoration: underline;
+}
+
+/* ---------------- Footer ---------------- */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 1.5rem;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 480px) {
+  .board-controls { flex-direction: column; align-items: flex-start; }
+  .file-grid { grid-template-columns: 1fr; }
+}

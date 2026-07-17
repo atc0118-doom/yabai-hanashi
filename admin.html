@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理室 — ヤバイハナシ.com</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Noto+Serif+JP:wght@400;600;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+
+<header class="admin-header">
+  <div class="case-stamp-logo">
+    <span class="stamp-ring">管理室</span>
+    <span class="stamp-core">ADMIN</span>
+  </div>
+  <p class="header-tagline">下書きの確認・編集・公開はここから</p>
+</header>
+
+<main class="admin-board">
+  <div id="admin-guard" class="admin-guard" hidden>
+    <p>このページはURLに <code>?admin=doom</code> を付けてアクセスしてください。</p>
+  </div>
+
+  <section id="admin-content">
+    <div class="admin-tabs">
+      <button class="admin-tab is-active" data-status="draft">下書き <span id="draft-count">0</span></button>
+      <button class="admin-tab" data-status="published">公開済み <span id="published-count">0</span></button>
+    </div>
+
+    <div class="admin-refresh-row">
+      <button id="refresh-btn" class="admin-btn admin-btn-ghost">再読み込み</button>
+      <span id="admin-status-msg" class="admin-status-msg"></span>
+    </div>
+
+    <div class="admin-list" id="admin-list"></div>
+
+    <div class="empty-state" id="admin-empty" hidden>
+      <p>該当する記事はありません。</p>
+    </div>
+  </section>
+</main>
+
+<div class="detail-overlay" id="edit-overlay" hidden>
+  <div class="detail-panel" id="edit-panel"></div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

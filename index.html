@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ヤバイハナシ.com — 未確認情報ドシエ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Noto+Serif+JP:wght@400;600;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="paper-texture"></div>
+
+<header class="site-header">
+  <div class="header-inner">
+    <div class="case-stamp-logo">
+      <span class="stamp-ring">ヤバイハナシ</span>
+      <span class="stamp-core">.com</span>
+    </div>
+    <p class="header-tagline">未確認情報・都市伝説・陰謀論 ドシエ収集庫</p>
+    <p class="header-disclaimer">※本サイトは個人の趣味プロジェクトによるエンターテインメントです。事実確認は各自でお願いします。</p>
+  </div>
+</header>
+
+<main class="dossier-board">
+  <div class="board-controls">
+    <div class="filter-row" id="category-filters">
+      <button class="filter-chip is-active" data-category="">全件</button>
+      <button class="filter-chip" data-category="UFO">UFO</button>
+      <button class="filter-chip" data-category="都市伝説">都市伝説</button>
+      <button class="filter-chip" data-category="陰謀論">陰謀論</button>
+      <button class="filter-chip" data-category="オカルト">オカルト</button>
+      <button class="filter-chip" data-category="ミステリー">ミステリー</button>
+      <button class="filter-chip" data-category="未確認生物">未確認生物</button>
+    </div>
+    <div class="board-meta">
+      <span id="article-count">0</span> 件のファイルを開示中
+    </div>
+  </div>
+
+  <div class="file-grid" id="file-grid">
+    <!-- カードはapp.jsで動的挿入 -->
+  </div>
+
+  <div class="empty-state" id="empty-state" hidden>
+    <p>該当するファイルは現在開示されていません。</p>
+    <p class="empty-sub">収集バッチは6時間ごとに新規情報をスキャンしています。</p>
+  </div>
+</main>
+
+<div class="detail-overlay" id="detail-overlay" hidden>
+  <div class="detail-panel" id="detail-panel"></div>
+</div>
+
+<footer class="site-footer">
+  <p>ヤバイハナシ.com は個人開発のエンターテインメント・プロジェクトです。掲載情報の正確性を保証するものではありません。</p>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
